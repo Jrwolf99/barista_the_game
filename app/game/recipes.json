@@ -1,0 +1,76 @@
+{
+  "recipes": [
+    {
+      "name": "Hot Vanilla Espresso Latte",
+      "hot_or_iced": "hot",
+      "symbol": "L",
+      "syrup_symbol": "V",
+      "ingredient_map": [
+        {
+          "espresso": [1, 2, 2],
+          "vanilla": [3, 4, 5]
+        }
+      ]
+    },
+    {
+      "name": "Iced Vanilla Espresso Latte",
+      "hot_or_iced": "iced",
+      "symbol": "L",
+      "syrup_symbol": "V",
+      "ingredient_map": [
+        {
+          "espresso": [1, 2, 3],
+          "vanilla": [3, 4, 6]
+        }
+      ]
+    },
+    {
+      "name": "Hot Caramel Macchiato",
+      "hot_or_iced": "hot",
+      "symbol": "CM",
+      "ingredient_map": [
+        {
+          "espresso": [1, 2, 2],
+          "vanilla": [3, 4, 5],
+          "caramel_drizzle": true
+        }
+      ]
+    },
+    {
+      "name": "Iced Caramel Macchiato",
+      "hot_or_iced": "iced",
+      "symbol": "CM",
+      "ingredient_map": [
+        {
+          "espresso": [1, 2, 3],
+          "vanilla": [3, 4, 6],
+          "caramel_drizzle": true
+        }
+      ]
+    },
+    {
+      "name": "Hot Chocolate",
+      "hot_or_iced": "hot",
+      "symbol": "HC",
+      "ingredient_map": [
+        {
+          "vanilla": [3, 4, 5],
+          "mocha": [1, 1, 2]
+        }
+      ]
+    },
+    {
+      "name": "Peppermint Hot Chocolate",
+      "hot_or_iced": "hot",
+      "symbol": "HC",
+      "syrup_symbol": "P",
+      "ingredient_map": [
+        {
+          "vanilla": [3, 4, 5],
+          "mocha": [1, 1, 2],
+          "peppermint": [3, 4, 5]
+        }
+      ]
+    }
+  ]
+}

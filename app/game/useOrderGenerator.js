@@ -3,7 +3,7 @@ import { useState } from 'react';
 import book from './recipes.json';
 import randomName from 'random-name';
 
-const sizes = ['tall', 'grande', 'venti'];
+const sizes = ['Tall', 'Grande', 'Venti'];
 
 export const useOrderGenerator = () => {
   const [currentOrder, setCurrentOrder] = useState(null);
@@ -33,6 +33,7 @@ export const useOrderGenerator = () => {
 
     setCurrentOrder({
       customer_name: randomName.first(),
+      drink_name: randomRecipe.name,
       size: randomSize,
       hot_or_iced: randomRecipe.hot_or_iced,
       symbol: randomRecipe.symbol,

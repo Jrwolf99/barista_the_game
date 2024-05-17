@@ -1,5 +1,7 @@
 'use client';
-import Station from '@/app/game/Station';
+import EspressoStation from '@/app/game/stations/EspressoStation';
+import Station from '@/app/game/stations/Station';
+import SyrupStation from '@/app/game/stations/SyrupStation';
 import React, { useState } from 'react';
 
 export default function GameBoard({
@@ -9,7 +11,7 @@ export default function GameBoard({
 }) {
   const [enteredName, setEnteredName] = useState('');
   return (
-    <div className=" flex flex-row justify-center items-start gap-5 my-5">
+    <div className="flex flex-row justify-center items-start gap-5 my-5">
       <div className="w-[200px]">
         <p className="text-xl text-white text-center max-w-[200px] h-[75px] mb-5">
           {currentOrder?.size} {currentOrder?.drink_name}
@@ -35,8 +37,12 @@ export default function GameBoard({
 
       <div className="border-2 border-white p-4 rounded-lg w-[50vw] text-white text-2xl text-center">
         <div className="grid grid-cols-2 gap-4">
-          <Station stationTitle="Espresso Machine" />
-          <Station stationTitle="Syrup Pumps" />
+          <Station stationTitle="Espresso Machine">
+            <EspressoStation />
+          </Station>
+          <Station stationTitle="Syrup Pumps">
+            <SyrupStation />
+          </Station>
           <Station stationTitle="Refresher Station" />
           <Station stationTitle="Frap Station" />
         </div>

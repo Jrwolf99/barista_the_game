@@ -24,7 +24,7 @@ const AppProvider = ({ children }) => {
     workingOrder,
     handleAddIngredient,
     handleSendOff,
-  } = useGame(handleTriggerNotification);
+  } = useGame(setScoreMoney, handleTriggerNotification);
 
   return (
     <AppContext.Provider

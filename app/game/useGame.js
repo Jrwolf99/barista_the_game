@@ -2,11 +2,10 @@
 import { useState } from 'react';
 import book from './recipes.json';
 import randomName from 'random-name';
-import { useNotification } from '@/app/game/useNotification';
 
 const sizes = ['Tall', 'Grande', 'Venti'];
 
-export const useGame = (handleTriggerNotification) => {
+export const useGame = (setScoreMoney, handleTriggerNotification) => {
   const [currentOrder, setCurrentOrder] = useState(null);
   const [workingOrder, setWorkingOrder] = useState(null);
 
@@ -60,10 +59,16 @@ export const useGame = (handleTriggerNotification) => {
 
     setWorkingOrder((prev) => {
       const newOrder = { ...prev };
+      const ingrNameKey = ingrName(ingr);
+      const ingrAmountValue = ingrAmount(ingr);
+
       newOrder.needed_ingredients = {
         ...newOrder.needed_ingredients,
-        [ingrName(ingr)]: ingrAmount(ingr),
+        [ingrNameKey]: newOrder.needed_ingredients[ingrNameKey]
+          ? newOrder.needed_ingredients[ingrNameKey] + ingrAmountValue
+          : ingrAmountValue,
       };
+
       return newOrder;
     });
   };

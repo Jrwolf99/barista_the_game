@@ -7,14 +7,15 @@ export default function GameProgressBar({
   duration,
   onComplete,
 }) {
+
   if (!going) return null;
 
   return (
     <ProgressBar
-      duration={5000}
+      duration={duration}
       onComplete={() => {
-        alert('Espresso is ready!');
-        setGoing(false);
+        setGoing(null);
+        onComplete();
       }}
     />
   );

@@ -1,8 +1,13 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import AppContext from '@/context/state';
+import { useControlTime } from '@/app/game/useControlTime';
 
-export default function TopBoard({ metaInfo }) {
-  const [prevScoreMoney, setPrevScoreMoney] = useState(metaInfo.scoreMoney);
+export default function TopBoard() {
+  const { scoreMoney } = useContext(AppContext);
+  const { formattedTime } = useControlTime();
+
+  const [prevScoreMoney, setPrevScoreMoney] = useState(scoreMoney);
   const [difference, setDifference] = useState(null);
   const [showMoneyDifference, setShowMoneyDifference] = useState(false);
 
@@ -17,17 +22,17 @@ export default function TopBoard({ metaInfo }) {
   };
 
   useEffect(() => {
-    if (metaInfo.scoreMoney !== prevScoreMoney) {
-      const diff = metaInfo.scoreMoney - prevScoreMoney;
+    if (scoreMoney !== prevScoreMoney) {
+      const diff = scoreMoney - prevScoreMoney;
       handleAddMoney(diff);
     }
-  }, [metaInfo.scoreMoney]); // Remove prevScoreMoney from dependencies
+  }, [scoreMoney]);
 
   return (
     <div className="relative w-full">
       <div className="flex items-center justify-between w-full">
-        <div className="text-2xl">Time: {metaInfo.formattedTime}</div>
-        <div className="text-2xl">Money: {metaInfo.scoreMoney}</div>
+        <div className="text-2xl">Time: {formattedTime}</div>
+        <div className="text-2xl">Money: {scoreMoney}</div>
         <div
           className={`w-[100px] text-center text-2xl absolute top-[70px] right-[10px] bg-green-800 p-2 rounded-lg border-2 border-white transform transition-all duration-500 ${
             showMoneyDifference

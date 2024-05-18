@@ -28,12 +28,12 @@ export default function ProgressBar({ duration, onComplete }) {
         <div
           className="flex items-center justify-start text-white text-sm font-medium px-2 h-full"
           style={{
-            width: `${Math.max(1, progress * 100)}%`, // Ensures there's always a minimum width to display text
-            backgroundColor: '#4CAF50', // Green
-            borderRadius: '9999px', // Fully rounded ends
+            width: `${Math.max(1, Math.sqrt(progress) * 100)}%`,
+            backgroundColor: '#4CAF50',
+            borderRadius: '9999px',
           }}
         >
-          {Math.ceil(timeLeft)}s
+          {timeLeft.toFixed(1)}s
         </div>
       </div>
     </div>

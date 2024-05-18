@@ -1,12 +1,10 @@
 'use client';
-import { useEffect, useState } from 'react';
-import book from './recipes.json';
+import { useContext, useEffect, useState } from 'react';
 import { useOrderGenerator } from '@/app/game/useOrderGenerator';
+import AppContext from '@/context/state';
 
-
-
-
-export const useControlGame = (setScoreMoney, handleTriggerNotification) => {
+export const useControlGame = (handleTriggerNotification) => {
+  const { setScoreMoney } = useContext(AppContext);
   const [workingOrder, setWorkingOrder] = useState(null);
   const { handleGenerateOrder, currentOrder } = useOrderGenerator();
 

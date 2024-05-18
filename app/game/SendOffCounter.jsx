@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import AppContext from '@/context/state';
+import React, { useContext, useState } from 'react';
 
-export default function SendOffCounter({
-  handleSendOff,
-  handleTriggerNotification,
-}) {
+export default function SendOffCounter() {
   const [enteredName, setEnteredName] = useState('');
+
+  const { handleSendOff, handleTriggerNotification } = useContext(AppContext);
 
   return (
     <div className="bg-white/5 p-4 border-2 border-white rounded-lg h-[50vh] w-[270px]">

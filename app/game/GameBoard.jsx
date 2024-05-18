@@ -3,13 +3,11 @@ import SendOffCounter from '@/app/game/SendOffCounter';
 import EspressoStation from '@/app/game/stations/EspressoStation';
 import Station from '@/app/game/stations/Station';
 import SyrupStation from '@/app/game/stations/SyrupStation';
-import React, { useState } from 'react';
+import AppContext from '@/context/state';
+import React, { useContext, useState } from 'react';
 
-export default function GameBoard({
-  currentOrder,
-  handleSendOff,
-  handleTriggerNotification,
-}) {
+export default function GameBoard() {
+  const { currentOrder } = useContext(AppContext);
   return (
     <div className="flex flex-row justify-center items-start gap-5 my-5">
       <div className="w-[200px]">
@@ -47,10 +45,7 @@ export default function GameBoard({
           <Station stationTitle="Frap Station" />
         </div>
       </div>
-      <SendOffCounter
-        handleSendOff={handleSendOff}
-        handleTriggerNotification={handleTriggerNotification}
-      />
+      <SendOffCounter />
     </div>
   );
 }

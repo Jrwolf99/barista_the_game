@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import AppContext from '@/context/state';
+import React, { useContext } from 'react';
 
-const NotificationBox = ({ message, show, setShow }) => {
+const NotificationBox = () => {
+  const { notificationMessage } = useContext(AppContext);
   return (
     <>
-      {show && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <div className="flex justify-between items-center">
-              <span>{message}</span>
-              <button
-                className="ml-4 text-gray-700 hover:text-gray-900"
-                onClick={() => setShow(false)}
-              >
-                &times;
-              </button>
-            </div>
+      <div
+        className={`fixed inset-0 flex items-center justify-center bg-white/10 bg-opacity-50 transition-opacity duration-500 ${
+          !!notificationMessage
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <div
+          className={`bg-white p-6 rounded-lg shadow-lg max-w-sm w-full transform transition-transform duration-500 ${
+            !!notificationMessage ? 'scale-100' : 'scale-[0.95]'
+          }`}
+        >
+          <div
+            className="text-[18px] text-black text-center"
+            style={{ whiteSpace: 'pre-line' }}
+          >
+            {notificationMessage}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

@@ -1,12 +1,9 @@
 'use client';
 import React, { useState } from 'react';
-import TopBoard from './TopBoard';
-import { useGameInfo } from './useGameInfo';
-import { useSearchParams } from 'next/navigation';
-import GameBoard from '@/app/game/GameBoard';
-import { useControlGame } from '@/app/game/useControlGame';
 import AppContext from '@/context/state';
 import Game from '@/app/game/Game';
+import { useGame } from '@/app/game/useGame';
+import { useNotification } from '@/app/game/useNotification';
 
 export default function GamePage() {
   return (
@@ -17,10 +14,32 @@ export default function GamePage() {
 }
 
 const AppProvider = ({ children }) => {
-  const { scoreMoney, setScoreMoney } = useGameInfo();
+  const [scoreMoney, setScoreMoney] = useState(0);
+
+  const { handleTriggerNotification, notificationMessage } = useNotification();
+
+  const {
+    handleGenerateOrder,
+    currentOrder,
+    workingOrder,
+    handleAddIngredient,
+    handleSendOff,
+  } = useGame(handleTriggerNotification);
 
   return (
-    <AppContext.Provider value={{ scoreMoney, setScoreMoney }}>
+    <AppContext.Provider
+      value={{
+        scoreMoney,
+        setScoreMoney,
+        handleGenerateOrder,
+        currentOrder,
+        workingOrder,
+        handleAddIngredient,
+        handleSendOff,
+        handleTriggerNotification,
+        notificationMessage,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

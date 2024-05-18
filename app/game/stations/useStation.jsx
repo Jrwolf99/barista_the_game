@@ -1,28 +1,19 @@
 import GameProgressBar from '@/app/game/tools/GameProgressBar';
-import { useMemo, useState } from 'react';
+import AppContext from '@/context/state';
+import { useContext, useState } from 'react';
 
 export const useStation = () => {
-  console.log('useStation');
-
-  const [makingObjectState, setMakingObjectState] = useState(null);
-
-  const makingObject = useMemo(() => {
-    return makingObjectState;
-  }, [makingObjectState]);
-
-  const ingrName = (ingr) => {
-    return Object.keys(ingr)[0];
-  };
-
-  const ingrAmount = (ingr) => {
-    return Object.values(ingr)[0];
-  };
+  const [makingObject, setMakingObject] = useState(null);
+  const { workingOrder, handleAddIngredient } = useContext(AppContext);
 
   const handleButtonClick = (ingr, duration) => {
-    console.log('Making ' + ingrAmount(ingr) + ' ' + ingrName(ingr) + '...');
-    setMakingObjectState({ duration, ingredient: ingr });
+    setMakingObject({ duration, ingredient: ingr });
   };
 
+  const handleComplete = () => {
+    handleAddIngredient(makingObject.ingredient);
+    setMakingObject(null);
+  };
   const Button = ({ ingr, duration, children }) => (
     <button
       onClick={() => handleButtonClick(ingr, duration)}
@@ -36,14 +27,10 @@ export const useStation = () => {
     return (
       <GameProgressBar
         going={makingObject?.ingredient}
-        setGoing={setMakingObjectState}
+        setGoing={setMakingObject}
         duration={makingObject?.duration}
         onComplete={() => {
-          alert(
-            `Finished making ${ingrAmount(makingObject.ingredient)} ${ingrName(
-              makingObject.ingredient
-            )}`
-          );
+          handleComplete();
         }}
       />
     );

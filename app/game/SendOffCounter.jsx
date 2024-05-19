@@ -43,21 +43,23 @@ export default function SendOffCounter() {
 
           {workingOrder && (
             <div className="flex flex-col justify-center items-center gap-5">
-              <div className="bg-transparent border-2 rounded-lg w-[120px]">
-                <span className="block text-xs text-center mt-2">
-                  {workingOrder.size} {workingOrder.hot_or_iced} cup
-                </span>
+              {workingOrder?.size && workingOrder?.hot_or_iced && (
+                <div className="bg-transparent border-2 rounded-lg w-[120px]">
+                  <span className="block text-xs text-center mt-2">
+                    {workingOrder.size} {workingOrder.hot_or_iced} cup
+                  </span>
 
-                <img
-                  src={
-                    workingOrder.hot_or_iced === 'hot'
-                      ? '/hot_cup.png'
-                      : '/ice_cup.png'
-                  }
-                  alt={`${workingOrder.size} ${workingOrder.hot_or_iced} cup`}
-                  className="w-full h-auto"
-                />
-              </div>
+                  <img
+                    src={
+                      workingOrder.hot_or_iced === 'hot'
+                        ? '/hot_cup.png'
+                        : '/ice_cup.png'
+                    }
+                    alt={`${workingOrder.size} ${workingOrder.hot_or_iced} cup`}
+                    className="w-full h-auto"
+                  />
+                </div>
+              )}
               {workingOrder.needed_ingredients && (
                 <div className="flex flex-col justify-center items-center gap-5">
                   {Object.entries(workingOrder.needed_ingredients).map(

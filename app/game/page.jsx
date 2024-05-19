@@ -16,7 +16,8 @@ export default function GamePage() {
 const AppProvider = ({ children }) => {
   const [scoreMoney, setScoreMoney] = useState(0);
 
-  const { handleTriggerNotification, notificationMessage } = useNotification();
+  const { handleTriggerNotification, notificationMessage, clearNotification } =
+    useNotification();
 
   const {
     handleGenerateOrder,
@@ -42,6 +43,7 @@ const AppProvider = ({ children }) => {
         handleSendOff,
         handleTriggerNotification,
         notificationMessage,
+        clearNotification,
       }}
     >
       {children}

@@ -9,8 +9,13 @@ export const useNotification = () => {
     setTimeout(() => setNotificationMessage(null), timeOpen);
   };
 
+  const clearNotification = () => {
+    setNotificationMessage(null);
+  };
+
   return {
     handleTriggerNotification,
     notificationMessage,
+    clearNotification,
   };
 };

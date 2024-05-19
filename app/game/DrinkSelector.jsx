@@ -11,18 +11,7 @@ export default function DrinkSelector() {
         scale={0.75}
         onClick={() => handleAddCup({ hot_or_iced: 'hot', size: 'Tall' })}
       />
-      <CupButton
-        type="hot"
-        size="Grande Hot"
-        scale={1}
-        onClick={() => handleAddCup({ hot_or_iced: 'hot', size: 'Grande' })}
-      />
-      <CupButton
-        type="hot"
-        size="Venti Hot"
-        scale={1.25}
-        onClick={() => handleAddCup({ hot_or_iced: 'hot', size: 'Venti' })}
-      />
+
       <CupButton
         type="cold"
         size="Tall Ice"
@@ -30,11 +19,25 @@ export default function DrinkSelector() {
         onClick={() => handleAddCup({ hot_or_iced: 'iced', size: 'Tall' })}
       />
       <CupButton
+        type="hot"
+        size="Grande Hot"
+        scale={1}
+        onClick={() => handleAddCup({ hot_or_iced: 'hot', size: 'Grande' })}
+      />
+      <CupButton
         type="cold"
         size="Grande Ice"
         scale={1}
         onClick={() => handleAddCup({ hot_or_iced: 'iced', size: 'Grande' })}
       />
+
+      <CupButton
+        type="hot"
+        size="Venti Hot"
+        scale={1.25}
+        onClick={() => handleAddCup({ hot_or_iced: 'hot', size: 'Venti' })}
+      />
+
       <CupButton
         type="cold"
         size="Venti Ice"

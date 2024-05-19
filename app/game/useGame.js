@@ -3,6 +3,7 @@ import { useState } from 'react';
 import book from './recipes.json';
 import randomName from 'random-name';
 import { humanize } from '@/app/stringHelpers';
+import next from 'next';
 
 const sizes = ['Tall', 'Grande', 'Venti'];
 
@@ -134,9 +135,18 @@ export const useGame = (setScoreMoney, handleTriggerNotification) => {
         const expected = currentOrder.needed_ingredients[ingr];
         const actual = workingOrder?.needed_ingredients?.[ingr] ?? 0;
 
+        if (expected === true) {
+          if (!actual) {
+            addErrorMessage(`• Missing ${humanize(ingr)}`);
+          }
+          continue;
+        }
+
         if (expected !== actual) {
           addErrorMessage(
-            `• Incorrect amount of ${ingr}. Expected: ${expected}, Entered: ${actual}`
+            `• Incorrect amount of ${humanize(
+              ingr
+            )}. Expected: ${expected}, Entered: ${actual}`
           );
         }
       }

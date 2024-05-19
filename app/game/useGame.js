@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import book from './recipes.json';
 import randomName from 'random-name';
+import { humanize } from '@/app/stringHelpers';
 
 const sizes = ['Tall', 'Grande', 'Venti'];
 
@@ -39,7 +40,7 @@ export const useGame = (setScoreMoney, handleTriggerNotification) => {
       hot_or_iced: randomRecipe.hot_or_iced,
       symbol: randomRecipe.symbol,
       syrup_symbol: randomRecipe.syrup_symbol,
-      needed_ingrediants: getIngredients(
+      needed_ingredients: getIngredients(
         randomRecipe.ingredient_map,
         randomSizeIndex
       ),
@@ -55,8 +56,6 @@ export const useGame = (setScoreMoney, handleTriggerNotification) => {
   };
 
   const handleAddIngredient = (ingr) => {
-    console.log(ingr);
-
     setWorkingOrder((prev) => {
       const newOrder = { ...prev };
       const ingrNameKey = ingrName(ingr);
@@ -64,43 +63,114 @@ export const useGame = (setScoreMoney, handleTriggerNotification) => {
 
       newOrder.needed_ingredients = {
         ...newOrder.needed_ingredients,
-        [ingrNameKey]: newOrder.needed_ingredients[ingrNameKey]
-          ? newOrder.needed_ingredients[ingrNameKey] + ingrAmountValue
-          : ingrAmountValue,
+        [ingrNameKey]:
+          newOrder.needed_ingredients &&
+          newOrder.needed_ingredients[ingrNameKey]
+            ? newOrder.needed_ingredients[ingrNameKey] + ingrAmountValue
+            : ingrAmountValue,
       };
 
       return newOrder;
     });
   };
 
+  const handleAddCup = (cup) => {
+    setWorkingOrder((prev) => {
+      const newOrder = { ...prev };
+      newOrder.hot_or_iced = cup.hot_or_iced;
+      newOrder.size = cup.size;
+      return newOrder;
+    });
+  };
+
+  const handleTrashOrder = () => {
+    setWorkingOrder(null);
+  };
+
   const handleSendOff = (enteredName) => {
     const errorMessages = [];
 
-    if (
-      enteredName.toLowerCase() !== currentOrder.customer_name.toLowerCase()
-    ) {
-      errorMessages.push(
-        `Customer name was wrong! They didn't appreciate that. Try again with the next customer!\n`
-      );
-      errorMessages.push(
-        `The name was ${currentOrder.customer_name} and not ${enteredName}.`
-      );
-    }
+    const addErrorMessage = (message) => {
+      errorMessages.push(message);
+    };
 
-    try {
-      if (errorMessages.length > 0) {
-        handleTriggerNotification(errorMessages.join('\n'), 3000);
-        return;
+    const checkOrderDetails = () => {
+      if (!workingOrder?.size || !workingOrder?.hot_or_iced) {
+        addErrorMessage('You forgot to add a cup! The drink went everywhere!');
+        return false;
       }
 
+      if (!workingOrder?.needed_ingredients) {
+        addErrorMessage('You forgot to add any ingredients!');
+        return false;
+      }
+
+      if (
+        enteredName.toLowerCase() !== currentOrder.customer_name.toLowerCase()
+      ) {
+        addErrorMessage(
+          `Ah! The customer's name was ${currentOrder.customer_name}. You called out ${enteredName}.`
+        );
+      }
+
+      if (currentOrder.hot_or_iced !== workingOrder?.hot_or_iced) {
+        addErrorMessage(
+          `The drink was supposed to be ${currentOrder.hot_or_iced}, but you made it ${workingOrder?.hot_or_iced}.`
+        );
+      }
+
+      if (currentOrder.size !== workingOrder?.size) {
+        addErrorMessage(
+          `The size was supposed to be ${currentOrder.size}, but you made it ${
+            workingOrder?.size ?? 'tall'
+          }.`
+        );
+      }
+      return errorMessages.length === 0;
+    };
+
+    const checkIngredients = () => {
+      for (let ingr in currentOrder.needed_ingredients) {
+        const expected = currentOrder.needed_ingredients[ingr];
+        const actual = workingOrder?.needed_ingredients?.[ingr] ?? 0;
+
+        if (expected !== actual) {
+          addErrorMessage(
+            `• Incorrect amount of ${ingr}. Expected: ${expected}, Entered: ${actual}`
+          );
+        }
+      }
+    };
+
+    const notifyErrors = () => {
+      if (errorMessages.length > 0) {
+        errorMessages.unshift('Sorry! The order was not correct.');
+        handleTriggerNotification(
+          errorMessages.join('\n'),
+          3000 * errorMessages.length
+        );
+
+        return true;
+      }
+      return false;
+    };
+
+    const completeOrder = () => {
       handleTriggerNotification(
-        currentOrder.drink_name +
-          '\nsent off successfully to ' +
-          currentOrder.customer_name
+        `${currentOrder.drink_name}\nsent off successfully to ${currentOrder.customer_name}`
       );
       setScoreMoney((prev) => prev + 1);
-    } finally {
       handleGenerateOrder();
+    };
+
+    if (checkOrderDetails()) {
+      checkIngredients();
+    }
+
+    if (!notifyErrors()) {
+      completeOrder();
+    } else {
+      handleTrashOrder();
     }
   };
 
@@ -109,6 +179,8 @@ export const useGame = (setScoreMoney, handleTriggerNotification) => {
     currentOrder,
     workingOrder,
     handleAddIngredient,
+    handleAddCup,
+    handleTrashOrder,
     handleSendOff,
   };
 };

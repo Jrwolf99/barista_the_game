@@ -23,6 +23,8 @@ const AppProvider = ({ children }) => {
     currentOrder,
     workingOrder,
     handleAddIngredient,
+    handleAddCup,
+    handleTrashOrder,
     handleSendOff,
   } = useGame(setScoreMoney, handleTriggerNotification);
 
@@ -35,6 +37,8 @@ const AppProvider = ({ children }) => {
         currentOrder,
         workingOrder,
         handleAddIngredient,
+        handleAddCup,
+        handleTrashOrder,
         handleSendOff,
         handleTriggerNotification,
         notificationMessage,

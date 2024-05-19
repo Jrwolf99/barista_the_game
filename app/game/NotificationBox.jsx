@@ -13,14 +13,11 @@ const NotificationBox = () => {
         }`}
       >
         <div
-          className={`bg-white p-6 rounded-lg shadow-lg max-w-sm w-full transform transition-transform duration-500 ${
+          className={`bg-white min-w-[800px] px-6 py-16 rounded-lg shadow-lg max-w-sm w-full transform transition-transform duration-500 ${
             !!notificationMessage ? 'scale-100' : 'scale-[0.95]'
           }`}
         >
-          <div
-            className="text-[18px] text-black text-center"
-            style={{ whiteSpace: 'pre-line' }}
-          >
+          <div className="text-[18px] text-black text-left whitespace-pre-line ml-[60px]">
             {notificationMessage}
           </div>
         </div>

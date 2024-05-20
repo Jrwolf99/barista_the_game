@@ -45,8 +45,8 @@
       "hot_or_iced": "hot",
       "symbol": "HC",
       "ingredient_map": {
-        "vanilla": [3, 4, 5],
-        "mocha": [1, 1, 2]
+        "mocha_sauce": [3, 4, 5],
+        "vanilla": [1, 1, 2]
       }
     },
     {
@@ -55,8 +55,8 @@
       "symbol": "HC",
       "syrup_symbol": "P",
       "ingredient_map": {
-        "vanilla": [3, 4, 5],
-        "mocha": [1, 1, 2],
+        "mocha_sauce": [3, 4, 5],
+        "vanilla": [1, 1, 2],
         "peppermint": [3, 4, 5]
       }
     }

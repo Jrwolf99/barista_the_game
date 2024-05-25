@@ -4,7 +4,7 @@ import React from 'react';
 export default function SyrupStation() {
   const { Button, ProgBar } = useStation();
   return (
-    <div className="mt-2 grid grid-cols-2 gap-4 text-[12px] leading-[15px]">
+    <div className="mt-2 grid grid-cols-2 gap-4 text-[10.5px] leading-[15px]">
       <>
         <div>
           <div className="text-center font-bold mb-1">Syrups</div>
@@ -55,6 +55,10 @@ export default function SyrupStation() {
             </Button>
             <Button duration={300} ingr={{ pistachio_sauce: 1 }}>
               Pistachio Sauce
+            </Button>
+
+            <Button duration={300} ingr={{ caramel_drizzle: true }}>
+              Caramel Drizzle
             </Button>
           </div>
         </div>

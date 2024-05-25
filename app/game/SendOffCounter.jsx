@@ -13,9 +13,9 @@ export default function SendOffCounter() {
   } = useContext(AppContext);
 
   return (
-    <div className="bg-white/5 p-4 border-2 border-white rounded-lg">
+    <div className="max-w-[200px] bg-white/5 p-4 border-2 border-white rounded-lg">
       <p className="text-lg text-white text-center">Send Off Counter</p>
-      <div className="flex flex-col justify-center items-center h-[50%] gap-5">
+      <div className="flex flex-col justify-center items-center gap-5">
         <form
           className="flex flex-col justify-center items-center gap-5"
           onSubmit={(e) => {
@@ -37,12 +37,12 @@ export default function SendOffCounter() {
             onChange={(e) => setEnteredName(e.target.value)}
             className="w-full mt-5 border-2 border-white rounded-lg text-[16px] text-black text-center"
           />
-          <button className="w-[150px] bg-blue-500 text-white rounded-lg p-2 text-[20px] mx-auto">
+          <button className="w-full bg-blue-500/50 hover:bg-blue-500/80 text-white rounded-lg text-[13px] mx-auto">
             Send Off
           </button>
 
           {workingOrder && (
-            <div className="flex flex-col justify-center items-center gap-5">
+            <div className="w-full flex flex-col justify-center items-center gap-5">
               {workingOrder?.size && workingOrder?.hot_or_iced && (
                 <div className="bg-transparent border-2 rounded-lg w-[120px]">
                   <span className="block text-xs text-center mt-2">
@@ -61,17 +61,19 @@ export default function SendOffCounter() {
                 </div>
               )}
               {workingOrder.needed_ingredients && (
-                <div className="flex flex-col justify-center items-center gap-5">
+                <div className="w-full grid grid-cols-6 justify-start items-start text-white text-[14px]">
                   {Object.entries(workingOrder.needed_ingredients).map(
                     ([key, value]) => (
                       <div
                         key={key}
-                        className="flex flex-row justify-center items-center gap-5"
+                        className="col-span-6 flex border-b border-gray-600 leading-tight space-x-2 py-2"
                       >
-                        <span className="text-white text-lg">
-                          {humanize(key)}:
+                        <span className="flex-1">
+                          {typeof value === 'number'
+                            ? `${humanize(key)}: `
+                            : humanize(key)}
                         </span>
-                        <span className="text-white text-lg">{value}</span>
+                        <span className="text-right">{value}</span>
                       </div>
                     )
                   )}
@@ -79,7 +81,7 @@ export default function SendOffCounter() {
               )}
               {/* trash order */}
               <button
-                className="w-[150px] bg-red-500 text-white rounded-lg p-2 text-[20px] mx-auto"
+                className="w-full bg-red-500/50 hover:bg-red-500/80 text-white rounded-lg text-[13px] mx-auto"
                 onClick={() => handleTrashOrder()}
               >
                 Trash Order

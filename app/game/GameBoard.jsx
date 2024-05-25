@@ -12,11 +12,18 @@ export default function GameBoard() {
   return (
     <div className="flex flex-row justify-center items-start gap-5 my-5">
       <div>
-        <p className="text-xl text-white text-center h-[75px] mb-5">
-          {currentOrder?.size} {currentOrder?.drink_name}
-          <br />
-          for {currentOrder?.customer_name}
-        </p>
+        <div
+          className={`w-full min-h-[75px] mb-2 max-w-[290px] mx-auto border-2 border-white rounded-lg p-2`}
+        >
+          <p
+            className={`text-xl text-white text-center ${
+              !currentOrder ? 'opacity-0' : ''
+            }`}
+          >
+            {currentOrder?.size} {currentOrder?.drink_name} for{' '}
+            {currentOrder?.customer_name}
+          </p>
+        </div>
         <div className="flex flex-row gap-5">
           <div className="relative bg-[#fafafa] border-2 border-white rounded-lg mx-auto w-[100px] h-[400px]">
             <img
@@ -39,7 +46,7 @@ export default function GameBoard() {
         </div>
       </div>
 
-      <div className="border-2 border-white p-4 rounded-lg text-white text-2xl text-center">
+      <div className="border-2 border-white p-4 rounded-lg text-white text-2xl text-center max-w-[700px]">
         <div className="grid grid-cols-2 gap-4">
           <Station stationTitle="Espresso Machine">
             <EspressoStation />
@@ -47,8 +54,8 @@ export default function GameBoard() {
           <Station stationTitle="Syrup Pumps">
             <SyrupStation />
           </Station>
-          <Station stationTitle="Refresher Station" />
-          <Station stationTitle="Frap Station" />
+          {/* <Station stationTitle="Refresher Station" /> */}
+          {/* <Station stationTitle="Frap Station" /> */}
         </div>
       </div>
       <div>

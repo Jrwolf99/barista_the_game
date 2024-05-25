@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 export default function DrinkSelector() {
   const { handleAddCup } = useContext(AppContext);
   return (
-    <div className="grid grid-cols-2 gap-1">
+    <div className="grid grid-cols-2 gap-1 min-w-[180px]">
       <CupButton
         type="hot"
         size="Tall Hot"

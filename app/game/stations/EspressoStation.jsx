@@ -1,8 +1,14 @@
 import { useStation } from '@/app/game/stations/useStation';
-import React from 'react';
+import AppContext from '@/context/state';
+import React, { useContext } from 'react';
 
 export default function EspressoStation() {
   const { Button, ProgBar } = useStation();
+
+  const { workingOrder } = useContext(AppContext);
+
+  const milkDuration = workingOrder?.hot_or_iced === 'iced' ? 1000 : 5000;
+
   return (
     <div className="mt-2 grid grid-cols-2 gap-4 text-[12px] leading-[15px]">
       <>
@@ -25,24 +31,28 @@ export default function EspressoStation() {
         </div>
 
         <div>
-          <div className="text-center font-bold mb-1">Steam Milk</div>
+          {workingOrder?.hot_or_iced === 'iced' ? (
+            <div className="text-center font-bold mb-1">Pour Milk</div>
+          ) : (
+            <div className="text-center font-bold mb-1">Steam Milk</div>
+          )}
           <div className="grid grid-cols-2 gap-2">
-            <Button duration={5000} ingr={{ half_and_half: 1 }}>
+            <Button duration={milkDuration} ingr={{ half_and_half: true }}>
               Half & Half
             </Button>
-            <Button duration={5000} ingr={{ whole_milk: 1 }}>
+            <Button duration={milkDuration} ingr={{ whole_milk: true }}>
               Whole Milk
             </Button>
-            <Button duration={5000} ingr={{ two_percent_milk: 1 }}>
+            <Button duration={milkDuration} ingr={{ two_percent_milk: true }}>
               2% Milk
             </Button>
-            <Button duration={5000} ingr={{ almond_milk: 1 }}>
+            <Button duration={milkDuration} ingr={{ almond_milk: true }}>
               Almond Milk
             </Button>
-            <Button duration={5000} ingr={{ oat_milk: 1 }}>
+            <Button duration={milkDuration} ingr={{ oat_milk: true }}>
               Oat Milk
             </Button>
-            <Button duration={5000} ingr={{ soy_milk: 1 }}>
+            <Button duration={milkDuration} ingr={{ soy_milk: true }}>
               Soy Milk
             </Button>
           </div>

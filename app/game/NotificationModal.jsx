@@ -1,7 +1,7 @@
 import AppContext from '@/context/state';
 import React, { useContext } from 'react';
 
-const NotificationBox = () => {
+const NotificationModal = () => {
   const { notificationMessage, clearNotification } = useContext(AppContext);
 
   const handleOutsideClick = (e) => {
@@ -42,4 +42,4 @@ const NotificationBox = () => {
   );
 };
 
-export default NotificationBox;
+export default NotificationModal;

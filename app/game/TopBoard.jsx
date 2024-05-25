@@ -31,10 +31,10 @@ export default function TopBoard() {
   return (
     <div className="relative w-full">
       <div className="flex items-center justify-between w-full">
-        <div className="text-2xl">Time: {formattedTime}</div>
-        <div className="text-2xl">Money: {scoreMoney}</div>
+        <div className="text-lg">Time: {formattedTime}</div>
+        <div className="text-lg">Money: {scoreMoney}</div>
         <div
-          className={`w-[100px] text-center text-2xl absolute top-[70px] right-[10px] bg-green-800 p-2 rounded-lg border-2 border-white transform transition-all duration-500 ${
+          className={`w-[100px] text-center text-lg absolute top-[70px] right-[10px] bg-green-800 p-2 rounded-lg border-2 border-white transform transition-all duration-500 ${
             showMoneyDifference
               ? 'opacity-100 translate-y-2'
               : 'opacity-0 translate-y-0'

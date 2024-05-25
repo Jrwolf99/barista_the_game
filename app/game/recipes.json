@@ -1,22 +1,24 @@
 {
   "recipes": [
     {
-      "name": "Hot Vanilla Espresso Latte",
+      "name": "Hot Vanilla Latte",
       "hot_or_iced": "hot",
       "symbol": "L",
       "syrup_symbol": "V",
       "ingredient_map": {
         "espresso": [1, 2, 2],
+        "two_percent_milk": true,
         "vanilla": [3, 4, 5]
       }
     },
     {
-      "name": "Iced Vanilla Espresso Latte",
+      "name": "Iced Vanilla Latte",
       "hot_or_iced": "iced",
       "symbol": "L",
       "syrup_symbol": "V",
       "ingredient_map": {
         "espresso": [1, 2, 3],
+        "two_percent_milk": true,
         "vanilla": [3, 4, 6]
       }
     },
@@ -26,6 +28,7 @@
       "symbol": "CM",
       "ingredient_map": {
         "espresso": [1, 2, 2],
+        "two_percent_milk": true,
         "vanilla": [3, 4, 5],
         "caramel_drizzle": true
       }
@@ -36,6 +39,7 @@
       "symbol": "CM",
       "ingredient_map": {
         "espresso": [1, 2, 3],
+        "two_percent_milk": true,
         "vanilla": [3, 4, 6],
         "caramel_drizzle": true
       }
@@ -46,6 +50,7 @@
       "symbol": "HC",
       "ingredient_map": {
         "mocha_sauce": [3, 4, 5],
+        "two_percent_milk": true,
         "vanilla": [1, 1, 2]
       }
     },
@@ -55,6 +60,7 @@
       "symbol": "HC",
       "syrup_symbol": "P",
       "ingredient_map": {
+        "two_percent_milk": true,
         "mocha_sauce": [3, 4, 5],
         "vanilla": [1, 1, 2],
         "peppermint": [3, 4, 5]

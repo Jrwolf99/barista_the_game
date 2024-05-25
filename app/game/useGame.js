@@ -62,6 +62,10 @@ export const useGame = (setScoreMoney, handleTriggerNotification) => {
       const ingrNameKey = ingrName(ingr);
       const ingrAmountValue = ingrAmount(ingr);
 
+      if (newOrder.needed_ingredients?.[ingrNameKey] === true) {
+        return newOrder;
+      }
+
       newOrder.needed_ingredients = {
         ...newOrder.needed_ingredients,
         [ingrNameKey]:
@@ -155,10 +159,7 @@ export const useGame = (setScoreMoney, handleTriggerNotification) => {
     const notifyErrors = () => {
       if (errorMessages.length > 0) {
         errorMessages.unshift('Sorry! The order was not correct.');
-        handleTriggerNotification(
-          errorMessages.join('\n'),
-          3000 * errorMessages.length
-        );
+        handleTriggerNotification(errorMessages.join('\n'), 3000000);
 
         return true;
       }
@@ -170,6 +171,7 @@ export const useGame = (setScoreMoney, handleTriggerNotification) => {
         `${currentOrder.drink_name}\nsent off successfully to ${currentOrder.customer_name}`
       );
       setScoreMoney((prev) => prev + 1);
+      handleTrashOrder();
       handleGenerateOrder();
     };
 
